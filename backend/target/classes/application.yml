@@ -1,0 +1,21 @@
+server:
+  port: 8080
+  compression:
+    enabled: true
+    mime-types: application/json,text/html,text/xml,text/plain,application/javascript,text/css
+spring:
+  application:
+    name: campus-connect
+  jackson:
+    serialization:
+      write-dates-as-timestamps: false
+  main:
+    banner-mode: off
+  security:
+    filter:
+      dispatcher-types: ASYNC,ERROR,REQUEST
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
