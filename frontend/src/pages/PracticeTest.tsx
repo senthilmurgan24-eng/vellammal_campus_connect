@@ -92,7 +92,7 @@ const PracticeTest = () => {
             <span className="material-symbols-outlined block text-2xl">school</span>
           </div>
           <div>
-            <h1 className="text-lg font-bold leading-tight tracking-tight">Vellammal Campus Connect</h1>
+            <h1 className="text-lg font-bold leading-tight tracking-tight">Nova Neeti IIT Academy</h1>
             <p className="text-xs text-slate-500 font-medium">JEE Main Full Mock - Test #24</p>
           </div>
         </div>

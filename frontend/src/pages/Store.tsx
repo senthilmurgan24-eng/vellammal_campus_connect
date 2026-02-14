@@ -139,7 +139,7 @@ const Store = () => {
               <span className="material-symbols-outlined text-2xl">auto_stories</span>
             </div>
             <div className="hidden lg:block">
-              <h2 className="text-[#0d141b] dark:text-white text-lg font-bold leading-tight tracking-tight">Vellammal Campus Connect</h2>
+              <h2 className="text-[#0d141b] dark:text-white text-lg font-bold leading-tight tracking-tight">Nova Neeti IIT Academy</h2>
               <p className="text-xs text-primary font-medium">NEET/JEE Preparation</p>
             </div>
           </div>
@@ -339,7 +339,7 @@ const Store = () => {
             </div>
           </div>
           <div className="mt-8 flex flex-col items-center justify-between border-t border-gray-100 dark:border-gray-800 pt-6 md:flex-row">
-            <p className="text-xs text-[#4c739a]">© 2024 Vellammal Campus Connect. All rights reserved.</p>
+            <p className="text-xs text-[#4c739a]">© 2024 Nova Neeti IIT Academy. All rights reserved.</p>
             <div className="flex gap-6 mt-4 md:mt-0">
               <a className="text-xs font-medium text-[#4c739a] hover:text-primary" href="#">
                 Privacy Policy

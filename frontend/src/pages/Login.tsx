@@ -74,7 +74,7 @@ function Login() {
               </defs>
             </svg>
           </div>
-          <h2 className="text-xl font-bold">Vellammal</h2>
+          <h2 className="text-xl font-bold">Nova Neeti IIT Academy</h2>
         </div>
         <button className="flex min-w-[84px] items-center justify-center rounded-lg h-10 px-4 bg-primary/10 text-primary text-sm font-bold">
           <span className="material-symbols-outlined mr-2 text-lg">help_outline</span>
@@ -101,7 +101,7 @@ function Login() {
               Empowering your journey to excellence in NEET &amp; JEE
             </h1>
             <p className="text-lg opacity-90 font-light leading-relaxed">
-              Vellammal Campus Connect: A comprehensive EdTech platform designed for the next generation of doctors and engineers.
+              A comprehensive EdTech platform designed for the next generation of doctors and engineers.
             </p>
             <div className="flex flex-wrap gap-3">
               <div className="flex items-center gap-2 bg-white/10 backdrop-blur-md px-4 py-2 rounded-full border border-white/20">
@@ -229,7 +229,7 @@ function Login() {
 
       <div className="lg:hidden p-8 bg-primary/5 dark:bg-primary/10">
         <div className="text-center">
-          <h3 className="text-xl font-bold text-primary mb-2">Vellammal Campus Connect</h3>
+          <h3 className="text-xl font-bold text-primary mb-2">Nova Neeti IIT Academy</h3>
           <p className="text-sm text-slate-600 dark:text-slate-400">Your digital gateway to academic excellence.</p>
         </div>
       </div>

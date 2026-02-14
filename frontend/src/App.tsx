@@ -4,6 +4,7 @@ import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import useNetworkStatus from './hooks/useNetworkStatus';
 import Toast from './components/ui/Toast';
 
+const Landing = lazy(() => import('./pages/Landing'));
 const Login = lazy(() => import('./pages/Login'));
 const Dashboard = lazy(() => import('./pages/Dashboard'));
 const PracticeTest = lazy(() => import('./pages/PracticeTest'));
@@ -27,7 +28,8 @@ function App() {
     <div className="min-h-screen bg-background-light dark:bg-background-dark text-[#0d141b] dark:text-white">
       {offlineBanner}
       <Routes>
-        <Route path="/" element={<Login />} />
+        <Route path="/" element={<Landing />} />
+        <Route path="/login" element={<Login />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/practice-tests" element={<PracticeTest />} />
         <Route path="/analytics" element={<Analytics />} />

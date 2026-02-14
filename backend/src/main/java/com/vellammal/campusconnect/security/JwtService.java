@@ -13,7 +13,6 @@ import java.time.Instant;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 @Service
 public class JwtService {
@@ -42,7 +41,7 @@ public class JwtService {
     public UsernamePasswordAuthenticationToken parse(String token) {
         Claims claims = Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(token).getBody();
         List<String> roles = claims.get("roles", List.class);
-        List<SimpleGrantedAuthority> authorities = roles == null ? List.of() : roles.stream().map(SimpleGrantedAuthority::new).collect(java.util.stream.Collectors.toList());
+        var authorities = roles == null ? List.of() : roles.stream().map(SimpleGrantedAuthority::new).toList();
         return new UsernamePasswordAuthenticationToken(claims.getSubject(), token, authorities);
     }
 }
