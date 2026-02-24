@@ -41,7 +41,7 @@ public class JwtService {
     public UsernamePasswordAuthenticationToken parse(String token) {
         Claims claims = Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(token).getBody();
         List<String> roles = claims.get("roles", List.class);
-        var authorities = roles == null ? List.of() : roles.stream().map(SimpleGrantedAuthority::new).toList();
+        List<SimpleGrantedAuthority> authorities = roles == null ? List.of() : roles.stream().map(SimpleGrantedAuthority::new).toList();
         return new UsernamePasswordAuthenticationToken(claims.getSubject(), token, authorities);
     }
 }
