@@ -1,5 +1,5 @@
 {
-  "name": "vellammal-campus-connect",
+  "name": "ranknova-institute",
   "version": "1.0.0",
   "private": true,
   "type": "module",
@@ -15,6 +15,7 @@
     "@tanstack/react-query-devtools": "^5.28.0",
     "axios": "^1.6.7",
     "clsx": "^2.1.1",
+    "lucide-react": "^0.564.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-error-boundary": "^4.0.11",
@@ -29,7 +30,6 @@
   },
   "devDependencies": {
     "@tailwindcss/forms": "^0.5.7",
-    "@types/node": "^25.2.3",
     "@types/react": "^18.2.48",
     "@types/react-dom": "^18.2.18",
     "@typescript-eslint/eslint-plugin": "^6.20.0",
@@ -42,7 +42,7 @@
     "eslint-plugin-react-hooks": "^4.6.0",
     "postcss": "^8.4.33",
     "tailwindcss": "^3.4.1",
-    "typescript": "^5.9.3",
+    "typescript": "^5.3.3",
     "vite": "^5.1.4",
     "vite-plugin-pwa": "^0.20.0"
   }

@@ -1,0 +1,11 @@
+export { Header } from './components/Header';
+export { Hero } from './components/Hero';
+export { KeyHighlights } from './components/KeyHighlights';
+export { About } from './components/About';
+export { Courses } from './components/Courses';
+export { Faculty } from './components/Faculty';
+export { Results } from './components/Results';
+export { Admissions } from './components/Admissions';
+export { Gallery } from './components/Gallery';
+export { NoticeBoard } from './components/NoticeBoard';
+export { Footer } from './components/Footer';

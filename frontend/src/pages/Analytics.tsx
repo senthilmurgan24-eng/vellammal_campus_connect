@@ -142,9 +142,9 @@ const Analytics = () => {
             <span className="material-symbols-outlined text-2xl">school</span>
           </div>
           <h1 className="font-bold text-lg leading-tight tracking-tight">
-            Vellammal
+            RankNova
             <br />
-            <span className="text-primary text-sm">Campus Connect</span>
+            <span className="text-primary text-sm">Institute</span>
           </h1>
         </div>
         <nav className="flex-1 px-4 space-y-1">
