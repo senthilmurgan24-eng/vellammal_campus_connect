@@ -108,24 +108,26 @@
     - Result: ✅ Compilation SUCCESS | ✅ Tests: 0/0 passed (no tests present)
     - Notes: Baseline build prior to plugin config failed due to var usage; fixed by adding release config.
   - **Deferred Work**: None
-  - **Commit**: pending
+  - **Commit**: 7ae0f23b - Step 2: Setup Baseline - Compile: SUCCESS | Tests: 0/0 passed
 
+- **Step 3: Update Java version to 21**
+  - **Status**: ⏳ In Progress
   - **Changes Made**:
-    - Verified JDK 21 availability
-    - Confirmed Maven wrapper executable
+    - Updated `<java.version>` property to 21 in pom.xml
   - **Review Code Changes**:
     - Sufficiency: ✅ All required changes present
     - Necessity: ✅ All changes necessary
       - Functional Behavior: ✅ Preserved
       - Security Controls: ✅ Preserved
   - **Verification**:
-    - Command: `#list_jdks`
-    - JDK: 21 available
-    - Build tool: Maven 3.9.12 (system `mvn`)
-    - Result: ✅ JDK 21 listed, Maven wrapper runnable
+    - Command: `cd backend && mvn clean test-compile -q` using JDK 21
+    - JDK: 21
+    - Build tool: Maven 3.9.12
+    - Result: ✅ Compilation SUCCESS (tests not executed)
     - Notes: None
   - **Deferred Work**: None
-  - **Commit**: fdb2ce4b - Step 1: Setup Environment - Compile: SUCCESS
+  - **Commit**: pending
+
 
 
 <!--
