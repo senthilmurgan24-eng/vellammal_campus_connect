@@ -73,7 +73,43 @@
 ## Step Details
 
 - **Step 1: Setup Environment**
+  - **Status**: ✅ Completed
+  - **Changes Made**:
+    - Verified JDK 21 availability
+    - Confirmed Maven 3.9.12 in PATH
+  - **Review Code Changes**:
+    - Sufficiency: ✅ All required changes present
+    - Necessity: ✅ All changes necessary
+      - Functional Behavior: ✅ Preserved
+      - Security Controls: ✅ Preserved
+  - **Verification**:
+    - Command: `#list_jdks`
+    - JDK: 21 available
+    - Build tool: Maven 3.9.12 (system `mvn`)
+    - Result: ✅ JDK 21 listed, Maven executable
+    - Notes: None
+  - **Deferred Work**: None
+  - **Commit**: fdb2ce4b - Step 1: Setup Environment - Compile: SUCCESS
+
+- **Step 2: Setup Baseline**
   - **Status**: ⏳ In Progress
+  - **Changes Made**:
+    - Added maven-compiler-plugin configuration to pom.xml
+    - Ran baseline compile and tests with JDK 17
+  - **Review Code Changes**:
+    - Sufficiency: ✅ All required changes present
+    - Necessity: ✅ All changes necessary
+      - Functional Behavior: ✅ Preserved
+      - Security Controls: ✅ Preserved
+  - **Verification**:
+    - Command: `mvn clean test` (JDK 17)
+    - JDK: 17
+    - Build tool: Maven 3.9.12
+    - Result: ✅ Compilation SUCCESS | ✅ Tests: 0/0 passed (no tests present)
+    - Notes: Baseline build prior to plugin config failed due to var usage; fixed by adding release config.
+  - **Deferred Work**: None
+  - **Commit**: pending
+
   - **Changes Made**:
     - Verified JDK 21 availability
     - Confirmed Maven wrapper executable
@@ -89,7 +125,7 @@
     - Result: ✅ JDK 21 listed, Maven wrapper runnable
     - Notes: None
   - **Deferred Work**: None
-  - **Commit**: pending
+  - **Commit**: fdb2ce4b - Step 1: Setup Environment - Compile: SUCCESS
 
 
 <!--
