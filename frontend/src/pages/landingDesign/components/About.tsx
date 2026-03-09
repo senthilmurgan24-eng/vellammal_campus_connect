@@ -29,7 +29,7 @@ export function About() {
               Building Future Leaders in Science & Medicine
             </h2>
             <p className="text-[#64748b] mb-6 leading-relaxed">
-              Nova Neeti IIT Academy is a premier coaching institute dedicated to nurturing young minds
+              Rank Nova Neeti IIT Academy is a premier coaching institute dedicated to nurturing young minds
               and preparing them for the most competitive entrance examinations in India. With over 15
               years of excellence, we have established ourselves as a trusted name in IIT-JEE and NEET
               preparation.

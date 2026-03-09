@@ -74,7 +74,7 @@ function Login() {
               </defs>
             </svg>
           </div>
-          <h2 className="text-xl font-bold">Nova Neeti IIT Academy</h2>
+          <h2 className="text-xl font-bold">Rank Nova Neeti IIT Academy</h2>
         </div>
         <button className="flex min-w-[84px] items-center justify-center rounded-lg h-10 px-4 bg-primary/10 text-primary text-sm font-bold">
           <span className="material-symbols-outlined mr-2 text-lg">help_outline</span>
@@ -229,7 +229,7 @@ function Login() {
 
       <div className="lg:hidden p-8 bg-primary/5 dark:bg-primary/10">
         <div className="text-center">
-          <h3 className="text-xl font-bold text-primary mb-2">Nova Neeti IIT Academy</h3>
+          <h3 className="text-xl font-bold text-primary mb-2">Rank Nova Neeti IIT Academy</h3>
           <p className="text-sm text-slate-600 dark:text-slate-400">Your digital gateway to academic excellence.</p>
         </div>
       </div>

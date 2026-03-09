@@ -1,11 +1,49 @@
 server:
-  port: 8080
+  port: 8081
   compression:
     enabled: true
     mime-types: application/json,text/html,text/xml,text/plain,application/javascript,text/css
+
 spring:
   application:
     name: campus-connect
+  
+  # Database Configuration
+  datasource:
+    url: jdbc:postgresql://localhost:5432/campus_connect
+    driver-class-name: org.postgresql.Driver
+    username: ${DB_USERNAME:postgres}
+    password: ${DB_PASSWORD:postgres}
+  
+  # JPA/Hibernate Configuration
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+        use_sql_comments: true
+  
+  # Email Configuration
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: ${EMAIL_USERNAME:your-email@gmail.com}
+    password: ${EMAIL_APP_PASSWORD:your-16-char-app-password}
+    properties:
+      mail:
+        debug: ${MAIL_DEBUG:false}
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+            required: true
+          connectiontimeout: 5000
+          timeout: 5000
+          writetimeout: 5000
+
   jackson:
     serialization:
       write-dates-as-timestamps: false
@@ -14,6 +52,11 @@ spring:
   security:
     filter:
       dispatcher-types: ASYNC,ERROR,REQUEST
+  
+app:
+  email:
+    from: ${EMAIL_FROM:${EMAIL_USERNAME:your-email@gmail.com}}
+
 management:
   endpoints:
     web:

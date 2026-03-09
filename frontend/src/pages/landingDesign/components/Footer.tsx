@@ -29,7 +29,7 @@ export function Footer() {
                 <GraduationCap className="w-7 h-7 text-white" />
               </div>
               <div>
-                <h3 className="text-xl font-bold tracking-tight">Nova Neeti</h3>
+                <h3 className="text-xl font-bold tracking-tight">Rank Nova Neeti</h3>
                 <p className="text-xs text-gray-300">IIT Academy</p>
               </div>
             </div>
@@ -144,7 +144,7 @@ export function Footer() {
         <div className="pt-8 border-t border-white/10">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             <p className="text-sm text-gray-300">
-              © 2026 Nova Neeti IIT Academy. All rights reserved.
+              © 2026 Rank Nova Neeti IIT Academy. All rights reserved.
             </p>
             <div className="flex gap-6 text-sm text-gray-300">
               <a href="#" className="hover:text-[#d4af37] transition-colors">Privacy Policy</a>

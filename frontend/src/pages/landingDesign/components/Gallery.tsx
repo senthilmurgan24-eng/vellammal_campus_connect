@@ -41,7 +41,7 @@ export function Gallery() {
               Gallery
             </span>
             <h2 className="text-3xl sm:text-4xl font-bold text-[#0f172a] mt-3 mb-4">
-              Campus Life at Nova Neeti
+              Campus Life at Rank Nova Neeti
             </h2>
             <p className="text-[#64748b] max-w-2xl mx-auto">
               A glimpse into our state-of-the-art facilities and vibrant learning environment
