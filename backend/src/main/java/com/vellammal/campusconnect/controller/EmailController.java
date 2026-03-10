@@ -4,6 +4,7 @@ import com.vellammal.campusconnect.entity.EmailLog;
 import com.vellammal.campusconnect.entity.EmailTrigger;
 import com.vellammal.campusconnect.service.EmailService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -76,5 +77,65 @@ public class EmailController {
             "eventType", eventType,
             "timestamp", System.currentTimeMillis()
         ));
+    }
+
+    /**
+     * Send admissions application details to admissions desk email
+     */
+    @PostMapping("/admissions-application")
+    public ResponseEntity<Map<String, Object>> sendAdmissionsApplication(@RequestBody Map<String, String> payload) {
+        String name = payload.getOrDefault("name", "").trim();
+        String course = payload.getOrDefault("course", "").trim();
+        String parentContact = payload.getOrDefault("parentContact", "").trim();
+        String email = payload.getOrDefault("email", "").trim();
+        String message = payload.getOrDefault("message", "").trim();
+
+        if (name.isEmpty() || course.isEmpty() || parentContact.isEmpty() || email.isEmpty()) {
+            return ResponseEntity.badRequest().body(Map.of(
+                "message", "name, course, parentContact and email are required",
+                "timestamp", System.currentTimeMillis()
+            ));
+        }
+
+        String safeName = escapeHtml(name);
+        String safeCourse = escapeHtml(course);
+        String safeParentContact = escapeHtml(parentContact);
+        String safeEmail = escapeHtml(email);
+        String safeMessage = message.isEmpty() ? "N/A" : escapeHtml(message);
+
+        String subject = "New Admission Application - " + safeName;
+        String body = """
+            <h2>New Admission Application</h2>
+            <p><strong>Student Name:</strong> %s</p>
+            <p><strong>Course:</strong> %s</p>
+            <p><strong>Parent Contact:</strong> %s</p>
+            <p><strong>Student Email:</strong> %s</p>
+            <p><strong>Message:</strong> %s</p>
+            """.formatted(safeName, safeCourse, safeParentContact, safeEmail, safeMessage);
+
+        boolean sent = emailService.sendEmailWithStatus("senthilmagilan0502@gmail.com", subject, body, null);
+
+        if (!sent) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(Map.of(
+                "sent", false,
+                "message", "Application saved but email delivery failed. Please verify email configuration.",
+                "timestamp", System.currentTimeMillis()
+            ));
+        }
+
+        return ResponseEntity.ok(Map.of(
+            "sent", true,
+            "message", "Application submitted and email sent",
+            "timestamp", System.currentTimeMillis()
+        ));
+    }
+
+    private String escapeHtml(String value) {
+        return value
+            .replace("&", "&amp;")
+            .replace("<", "&lt;")
+            .replace(">", "&gt;")
+            .replace("\"", "&quot;")
+            .replace("'", "&#39;");
     }
 }

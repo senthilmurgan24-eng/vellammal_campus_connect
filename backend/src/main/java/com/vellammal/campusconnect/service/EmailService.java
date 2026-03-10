@@ -50,12 +50,21 @@ public class EmailService {
      * Send a custom email
      */
     public void sendEmail(String to, String subject, String body, EmailTrigger trigger) {
+        sendEmailWithStatus(to, subject, body, trigger);
+    }
+
+    /**
+     * Send a custom email and return whether it was sent successfully
+     */
+    public boolean sendEmailWithStatus(String to, String subject, String body, EmailTrigger trigger) {
         EmailLog emailLog = new EmailLog();
         emailLog.setRecipient(to);
         emailLog.setSubject(subject);
         emailLog.setBody(body);
         emailLog.setTrigger(trigger);
         emailLog.setStatus("PENDING");
+
+        boolean sent = false;
         
         try {
             MimeMessage message = mailSender.createMimeMessage();
@@ -70,6 +79,7 @@ public class EmailService {
             
             emailLog.setStatus("SENT");
             emailLog.setSentAt(LocalDateTime.now());
+            sent = true;
             log.info("Email sent successfully to: {}", to);
             
         } catch (MessagingException | MailException e) {
@@ -79,6 +89,8 @@ public class EmailService {
         } finally {
             logRepository.save(emailLog);
         }
+
+        return sent;
     }
     
     /**

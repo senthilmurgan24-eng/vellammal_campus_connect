@@ -1,5 +1,6 @@
 import { useMemo, useState } from 'react';
 import { Send, CheckCircle } from 'lucide-react';
+import { submitAdmissionApplication } from '@/api/services/admissions';
 
 export function Admissions() {
   const [formData, setFormData] = useState({
@@ -11,6 +12,8 @@ export function Admissions() {
   });
 
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState('');
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
     setFormData({
@@ -31,14 +34,24 @@ export function Admissions() {
     [formData.name, formData.course, isEmailValid, isContactValid, contactDigits]
   );
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     const payload = { ...formData, parentContact: contactDigits };
-    console.log('Admission Form Submission:', JSON.stringify(payload, null, 2));
-    // Simulate form submission
-    setIsSubmitted(true);
-    setTimeout(() => {
-      setIsSubmitted(false);
+
+    if (!isFormValid) return;
+
+    try {
+      setIsSubmitting(true);
+      setSubmitError('');
+      const response = await submitAdmissionApplication(payload);
+      if (!response.sent) {
+        setSubmitError(response.message || 'Email delivery failed. Please try again.');
+        return;
+      }
+      setIsSubmitted(true);
+      setTimeout(() => {
+        setIsSubmitted(false);
+      }, 3000);
       setFormData({
         name: '',
         course: '',
@@ -46,7 +59,12 @@ export function Admissions() {
         email: '',
         message: '',
       });
-    }, 3000);
+    } catch (error) {
+      console.error('Admission submission failed:', error);
+      setSubmitError('Unable to submit application right now. Please try again.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -217,15 +235,19 @@ export function Admissions() {
                 <button
                   type="submit"
                   className={`w-full py-4 rounded-lg flex items-center justify-center gap-2 font-semibold transition-colors duration-200 ${
-                    isFormValid
+                    isFormValid && !isSubmitting
                       ? 'bg-[#d4af37] text-white hover:bg-[#b8991f]'
                       : 'bg-[#d4af37]/40 text-white/60 cursor-not-allowed pointer-events-none'
                   }`}
-                  disabled={!isFormValid}
+                  disabled={!isFormValid || isSubmitting}
                 >
-                  <span>Submit Application</span>
+                  <span>{isSubmitting ? 'Submitting...' : 'Submit Application'}</span>
                   <Send className="w-5 h-5" />
                 </button>
+
+                {submitError && (
+                  <p className="text-sm text-red-600 text-center">{submitError}</p>
+                )}
               </form>
             )}
           </div>
