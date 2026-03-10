@@ -113,6 +113,15 @@ public class EmailController {
             <p><strong>Message:</strong> %s</p>
             """.formatted(safeName, safeCourse, safeParentContact, safeEmail, safeMessage);
 
+        String configIssue = emailService.getEmailConfigurationIssue();
+        if (configIssue != null) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(Map.of(
+                "sent", false,
+                "message", configIssue,
+                "timestamp", System.currentTimeMillis()
+            ));
+        }
+
         boolean sent = emailService.sendEmailWithStatus("senthilmagilan0502@gmail.com", subject, body, null);
 
         if (!sent) {

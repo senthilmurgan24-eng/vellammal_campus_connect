@@ -28,6 +28,23 @@ public class EmailService {
     private final EmailLogRepository logRepository;
     @Value("${app.email.from}")
     private String fromAddress;
+    @Value("${spring.mail.username:}")
+    private String mailUsername;
+    @Value("${spring.mail.password:}")
+    private String mailPassword;
+
+    public String getEmailConfigurationIssue() {
+        if (mailUsername == null || mailUsername.isBlank() || mailUsername.contains("your-email@gmail.com")) {
+            return "SMTP username is not configured. Set EMAIL_USERNAME.";
+        }
+        if (mailPassword == null || mailPassword.isBlank() || mailPassword.contains("your-16-char-app-password")) {
+            return "SMTP app password is not configured. Set EMAIL_APP_PASSWORD.";
+        }
+        if (fromAddress == null || fromAddress.isBlank() || fromAddress.contains("your-email@gmail.com")) {
+            return "From address is not configured. Set EMAIL_FROM or EMAIL_USERNAME.";
+        }
+        return null;
+    }
     
     /**
      * Send email based on event type
