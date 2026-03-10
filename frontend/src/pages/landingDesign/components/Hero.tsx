@@ -4,7 +4,6 @@ import type { PointerEvent } from 'react';
 import banner1 from '@/assets/hero/banner_1.png';
 import banner2 from '@/assets/hero/banner_2.png';
 import banner3 from '@/assets/hero/banner_3.png';
-import banner4 from '@/assets/hero/banner_4.png';
 
 type Slide = {
   id: string;
@@ -27,11 +26,6 @@ const slides: Slide[] = [
     id: 'hero-doctor-mentor',
     image: banner3,
     alt: 'Doctor mentoring medical students during anatomy class'
-  },
-  {
-    id: 'hero-achievement',
-    image: banner4,
-    alt: 'Logesh Narayanan S - IIT JEE Mains 2026 Phase I achievement with 94.9209 percentile at Rank Nova NEET IIT Academy'
   }
 ];
 

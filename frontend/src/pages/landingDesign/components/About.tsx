@@ -1,4 +1,5 @@
 import { CheckCircle } from 'lucide-react';
+import banner4 from '@/assets/hero/banner_4.png';
 
 export function About() {
   return (
@@ -9,8 +10,8 @@ export function About() {
           <div className="relative">
             <div className="aspect-[4/3] rounded-2xl overflow-hidden shadow-2xl">
               <img
-                src="https://images.unsplash.com/photo-1758270704226-db897b180243?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxoaWdoJTIwc2Nob29sJTIwY2xhc3Nyb29tJTIwdGVhY2hpbmd8ZW58MXx8fHwxNzcxMDkyOTAzfDA&ixlib=rb-4.1.0&q=80&w=1080"
-                alt="Classroom teaching"
+                src={banner4}
+                alt="IIT JEE Mains 2026 achievement banner"
                 className="w-full h-full object-cover"
               />
             </div>

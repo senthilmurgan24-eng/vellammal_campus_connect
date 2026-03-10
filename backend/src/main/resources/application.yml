@@ -10,14 +10,14 @@ spring:
   
   # Database Configuration
   datasource:
-    url: jdbc:postgresql://localhost:5432/campus_connect
-    driver-class-name: org.postgresql.Driver
+    url: ${DB_URL:jdbc:postgresql://localhost:5432/campus_connect}
+    driver-class-name: ${DB_DRIVER:org.postgresql.Driver}
     username: ${DB_USERNAME:postgres}
-    password: ${DB_PASSWORD:postgres}
+    password: ${DB_PASSWORD:admin}
   
   # JPA/Hibernate Configuration
   jpa:
-    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    database-platform: ${DB_DIALECT:org.hibernate.dialect.PostgreSQLDialect}
     hibernate:
       ddl-auto: update
     show-sql: true
@@ -52,7 +52,7 @@ spring:
   security:
     filter:
       dispatcher-types: ASYNC,ERROR,REQUEST
-  
+
 app:
   email:
     from: ${EMAIL_FROM:${EMAIL_USERNAME:your-email@gmail.com}}
