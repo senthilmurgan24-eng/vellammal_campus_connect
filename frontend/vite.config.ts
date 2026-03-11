@@ -13,7 +13,7 @@ export default defineConfig({
       injectManifest: { swDest: 'sw.js' },
       includeAssets: ['favicon.svg', 'robots.txt', 'apple-touch-icon.png'],
       manifest: {
-        name: 'Rank Nova Neeti IIT Academy',
+        name: 'RankNova Neet IIT Academy',
         short_name: 'VCC',
         description: 'Unified portal for students, parents, and faculty',
         theme_color: '#137fec',

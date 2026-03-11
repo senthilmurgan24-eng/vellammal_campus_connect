@@ -38,7 +38,7 @@ export function Header() {
               <img src={logo} alt="Nova Neeti Icon" className="h-full w-full object-cover" />
             </div>
             <div>
-              <h1 className="text-xl font-bold text-[#1E3A8A] tracking-tight">Rank Nova Neeti</h1>
+              <h1 className="text-xl font-bold text-[#1E3A8A] tracking-tight">RankNova Neet</h1>
               <p className="text-xs text-[#64748b]">IIT Academy</p>
             </div>
           </div>

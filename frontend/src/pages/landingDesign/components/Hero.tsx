@@ -15,7 +15,7 @@ const slides: Slide[] = [
   {
     id: 'hero-students-gate',
     image: banner1,
-    alt: 'Group of Indian students outside Rank Nova Neeti IIT Academy'
+    alt: 'Group of Indian students outside RankNova Neet IIT Academy'
   },
   {
     id: 'hero-classroom-focus',
@@ -155,7 +155,7 @@ function HeroComponent() {
     <div className="relative z-10 max-w-6xl px-4 sm:px-6 lg:px-8 py-14 lg:py-24 text-left text-white">
       <div className="max-w-3xl space-y-6">
         <span className="inline-flex items-center gap-2 rounded-full bg-white/10 px-4 py-2 text-xs font-semibold tracking-[0.4em] text-white uppercase">
-          Rank Nova Neeti IIT Academy
+          RankNova Neet IIT Academy
         </span>
         <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight drop-shadow-[0_10px_35px_rgba(0,0,0,0.45)]">
           Empowering Tomorrow’s Achievers Today

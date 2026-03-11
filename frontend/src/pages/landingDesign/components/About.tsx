@@ -1,24 +1,10 @@
 import { CheckCircle } from 'lucide-react';
-import banner4 from '@/assets/hero/banner_4.png';
 
 export function About() {
   return (
     <section id="about" className="py-20 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-          {/* Left - Image */}
-          <div className="relative">
-            <div className="aspect-[4/3] rounded-2xl overflow-hidden shadow-2xl">
-              <img
-                src={banner4}
-                alt="IIT JEE Mains 2026 achievement banner"
-                className="w-full h-full object-cover"
-              />
-            </div>
-            {/* Decorative element */}
-            <div className="absolute -bottom-6 -right-6 w-48 h-48 bg-[#1E3A8A]/10 rounded-2xl -z-10"></div>
-          </div>
-
+        <div className="grid grid-cols-1 gap-12 items-center">
           {/* Right - Content */}
           <div>
             <div className="mb-4">
@@ -30,7 +16,7 @@ export function About() {
               Building Future Leaders in Science & Medicine
             </h2>
             <p className="text-[#64748b] mb-6 leading-relaxed">
-              Rank Nova Neeti IIT Academy is a premier coaching institute dedicated to nurturing young minds
+              RankNova Neet IIT Academy is a premier coaching institute dedicated to nurturing young minds
               and preparing them for the most competitive entrance examinations in India. With over 15
               years of excellence, we have established ourselves as a trusted name in IIT-JEE and NEET
               preparation.

@@ -1,5 +1,6 @@
 import { useEffect, useState, useRef } from 'react';
 import { Trophy, Target, Award, TrendingUp } from 'lucide-react';
+import banner4 from '@/assets/hero/banner_4.png';
 
 export function Results() {
   const [counts, setCounts] = useState({
@@ -113,10 +114,19 @@ export function Results() {
           <p className="text-gray-300 max-w-2xl mx-auto">
             Our students' success is a testament to our commitment to excellence in education
           </p>
+          <div className="mt-8 max-w-4xl mx-auto">
+            <div className="aspect-[4/3] rounded-2xl overflow-hidden shadow-2xl border border-white/10">
+              <img
+                src={banner4}
+                alt="IIT JEE Mains 2026 achievement banner"
+                className="w-full h-full object-cover"
+              />
+            </div>
+          </div>
         </div>
 
         {/* Stats Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+        {/* <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
           {stats.map((stat, index) => (
             <div
               key={index}
@@ -132,7 +142,7 @@ export function Results() {
               <div className="text-gray-300 font-medium">{stat.label}</div>
             </div>
           ))}
-        </div>
+        </div> */}
 
         {/* Recent Achievements */}
         <div className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-6">
