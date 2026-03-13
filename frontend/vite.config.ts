@@ -10,7 +10,6 @@ export default defineConfig({
       strategies: 'injectManifest',
       srcDir: 'src/pwa',
       filename: 'sw.ts',
-      injectManifest: { swDest: 'sw.js' },
       includeAssets: ['favicon.svg', 'robots.txt', 'apple-touch-icon.png'],
       manifest: {
         name: 'RankNova Neet IIT Academy',
