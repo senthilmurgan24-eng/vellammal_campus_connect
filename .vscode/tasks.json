@@ -4,7 +4,7 @@
     {
       "label": "Run Backend",
       "type": "shell",
-      "command": "$p = Get-NetTCPConnection -LocalPort 8081 -State Listen -ErrorAction SilentlyContinue | Select-Object -ExpandProperty OwningProcess -First 1; if ($p) { Stop-Process -Id $p -Force; Write-Host \"Freed port 8081 (PID $p)\" }; mvn spring-boot:run",
+      "command": "powershell -ExecutionPolicy Bypass -File \"${workspaceFolder}\\deploy\\scripts\\run-backend-local.ps1\"",
       "options": {
         "cwd": "${workspaceFolder}/backend"
       },

@@ -57,6 +57,7 @@ Systemd unit file added:
 
 Secrets file location used by service:
 - `/etc/default/campus-connect`
+- Template in repo: `deploy/systemd/campus-connect.env.example`
 
 Example `/etc/default/campus-connect`:
 
