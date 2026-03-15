@@ -29,7 +29,7 @@ export function Footer() {
                 <GraduationCap className="w-7 h-7 text-white" />
               </div>
               <div>
-                <h3 className="text-xl font-bold tracking-tight">RankNova Neet</h3>
+                <h3 className="text-xl font-bold tracking-tight">RANKNOVA INSTITUTE</h3>
                 <p className="text-xs text-gray-300">IIT Academy</p>
               </div>
             </div>
@@ -119,9 +119,10 @@ export function Footer() {
               <div className="flex items-start gap-3">
                 <MapPin className="w-5 h-5 text-[#d4af37] flex-shrink-0 mt-0.5" />
                 <p className="text-sm text-gray-300">
-                  123 Academic Avenue,<br />
-                  Education District,<br />
-                  City - 560001
+                  RANKNOVA INSTITUTE LLP,<br />
+                  MELDA, WEST BENGAL, 732142,<br />
+                  Mobile : 9344104954, <br />
+                  Email :info@ranknovainstitute.com
                 </p>
               </div>
               <div className="flex items-center gap-3">
@@ -144,7 +145,7 @@ export function Footer() {
         <div className="pt-8 border-t border-white/10">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             <p className="text-sm text-gray-300">
-              © 2026 RankNova Neet IIT Academy. All rights reserved.
+              © 2026 RANKNOVA INSTITUTE. All rights reserved.
             </p>
             <div className="flex gap-6 text-sm text-gray-300">
               <a href="#" className="hover:text-[#d4af37] transition-colors">Privacy Policy</a>

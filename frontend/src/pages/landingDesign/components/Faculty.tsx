@@ -1,33 +1,6 @@
 import { Quote } from 'lucide-react';
 
 export function Faculty() {
-  const facultyMembers = [
-    {
-      name: 'Dr. Rajesh Kumar',
-      qualification: 'IIT Delhi | Ph.D. in Physics',
-      description: '15+ years of experience in coaching JEE Physics with 100+ AIR holders',
-      image: 'https://images.unsplash.com/photo-1584554376766-ac0f2c65e949?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxwcm9mZXNzaW9uYWwlMjBtYWxlJTIwdGVhY2hlcnxlbnwxfHx8fDE3NzEwNDk5MzZ8MA&ixlib=rb-4.1.0&q=80&w=1080',
-    },
-    {
-      name: 'Prof. Priya Sharma',
-      qualification: 'IIT Bombay | M.Sc. Chemistry',
-      description: 'Expert in Organic Chemistry with a track record of top NEET rankers',
-      image: 'https://images.unsplash.com/photo-1758685848208-e108b6af94cc?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxwcm9mZXNzaW9uYWwlMjBmZW1hbGUlMjB0ZWFjaGVyfGVufDF8fHx8MTc3MTA0OTkzNnww&ixlib=rb-4.1.0&q=80&w=1080',
-    },
-    {
-      name: 'Mr. Aditya Singh',
-      qualification: 'IIT Kanpur | B.Tech + M.Tech',
-      description: 'Mathematics wizard known for simplifying complex problems',
-      image: 'https://images.unsplash.com/photo-1584554376766-ac0f2c65e949?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxwcm9mZXNzaW9uYWwlMjBtYWxlJTIwdGVhY2hlcnxlbnwxfHx8fDE3NzEwNDk5MzZ8MA&ixlib=rb-4.1.0&q=80&w=1080',
-    },
-    {
-      name: 'Dr. Meera Reddy',
-      qualification: 'AIIMS Delhi | MD',
-      description: 'Biology expert with deep insights into NEET examination patterns',
-      image: 'https://images.unsplash.com/photo-1758685848208-e108b6af94cc?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxwcm9mZXNzaW9uYWwlMjBmZW1hbGUlMjB0ZWFjaGVyfGVufDF8fHx8MTc3MTA0OTkzNnww&ixlib=rb-4.1.0&q=80&w=1080',
-    },
-  ];
-
   return (
     <section id="faculty" className="py-20 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -50,41 +23,6 @@ export function Faculty() {
               "Our teachers don't just teach — they mentor and mould futures."
             </p>
           </div>
-        </div>
-
-        {/* Faculty Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
-          {facultyMembers.map((faculty, index) => (
-            <div
-              key={index}
-              className="group cursor-pointer"
-            >
-              <div className="relative mb-6">
-                {/* Circular Photo */}
-                <div className="w-full aspect-square rounded-full overflow-hidden border-4 border-gray-100 group-hover:border-[#d4af37] transition-all duration-300 shadow-lg group-hover:shadow-2xl">
-                  <img
-                    src={faculty.image}
-                    alt={faculty.name}
-                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
-                  />
-                </div>
-                {/* Decorative ring */}
-                <div className="absolute inset-0 rounded-full border-2 border-[#d4af37]/0 group-hover:border-[#d4af37]/30 transition-all duration-300 scale-110"></div>
-              </div>
-
-              <div className="text-center">
-                <h3 className="text-lg font-bold text-[#1E3A8A] mb-2 group-hover:text-[#d4af37] transition-colors">
-                  {faculty.name}
-                </h3>
-                <p className="text-sm text-[#d4af37] font-medium mb-3">
-                  {faculty.qualification}
-                </p>
-                <p className="text-sm text-[#64748b] leading-relaxed">
-                  {faculty.description}
-                </p>
-              </div>
-            </div>
-          ))}
         </div>
 
         {/* Medical Students & +2 Students Photos */}

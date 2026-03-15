@@ -12,7 +12,7 @@ export default defineConfig({
       filename: 'sw.ts',
       includeAssets: ['favicon.svg', 'robots.txt', 'apple-touch-icon.png'],
       manifest: {
-        name: 'RankNova Neet IIT Academy',
+        name: 'RANKNOVA INSTITUTE',
         short_name: 'VCC',
         description: 'Unified portal for students, parents, and faculty',
         theme_color: '#137fec',

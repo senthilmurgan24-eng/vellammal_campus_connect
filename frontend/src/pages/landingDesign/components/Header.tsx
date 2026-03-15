@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Menu, X, LogIn } from 'lucide-react';
-import logo from '@/assets/static/logo.png';
 
 export function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -34,12 +33,9 @@ export function Header() {
         <div className="flex items-center justify-between">
           {/* Logo */}
           <div className="flex items-center gap-3">
-            <div className="h-14 w-14 border border-transparent overflow-hidden">
-              <img src={logo} alt="Nova Neeti Icon" className="h-full w-full object-cover" />
-            </div>
             <div>
-              <h1 className="text-xl font-bold text-[#1E3A8A] tracking-tight">RankNova Neet</h1>
-              <p className="text-xs text-[#64748b]">IIT Academy</p>
+              <h1 className="text-xl font-bold text-[#1E3A8A] tracking-tight">RANKNOVA INSTITUTE</h1>
+              <p className="text-xs text-[#64748b]">NEET IIT Academy</p>
             </div>
           </div>
 
