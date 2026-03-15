@@ -3,7 +3,7 @@ import { memo, useCallback, useEffect, useRef, useState } from 'react';
 import type { PointerEvent } from 'react';
 import banner1 from '@/assets/hero/banner_1.png';
 import banner2 from '@/assets/hero/banner_2.png';
-import logo from '@/assets/static/logo.png';
+import heroLogo from '@/assets/hero/banner_3_logo.webp';
 
 type Slide = {
   id: string;
@@ -24,7 +24,7 @@ const slides: Slide[] = [
   },
   {
     id: 'hero-doctor-mentor',
-    image: logo,
+    image: heroLogo,
     alt: 'RANKNOVA INSTITUTE logo'
   }
 ];
