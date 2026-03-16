@@ -120,21 +120,20 @@ export function Footer() {
                 <MapPin className="w-5 h-5 text-[#d4af37] flex-shrink-0 mt-0.5" />
                 <p className="text-sm text-gray-300">
                   RANKNOVA INSTITUTE LLP,<br />
-                  MELDA, WEST BENGAL, 732142,<br />
-                  Mobile : 9344104954, <br />
-                  Email :info@ranknovainstitute.com
+                  MALDA, WEST BENGAL, 732142,<br />
+                  Mob : 9344104954, <br />
                 </p>
               </div>
               <div className="flex items-center gap-3">
                 <Phone className="w-5 h-5 text-[#d4af37] flex-shrink-0" />
-                <a href="tel:+919876543210" className="text-sm text-gray-300 hover:text-[#d4af37] transition-colors">
-                  +91 98765 43210
+                <a href="tel:+919344104954" className="text-sm text-gray-300 hover:text-[#d4af37] transition-colors">
+                  +91 9344104954
                 </a>
               </div>
               <div className="flex items-center gap-3">
                 <Mail className="w-5 h-5 text-[#d4af37] flex-shrink-0" />
-                <a href="mailto:info@novaneet.edu" className="text-sm text-gray-300 hover:text-[#d4af37] transition-colors">
-                  info@novaneet.edu
+                <a href="mailto:info@ranknovainstitute.com" className="text-sm text-gray-300 hover:text-[#d4af37] transition-colors">
+                  info@ranknovainstitute.com
                 </a>
               </div>
             </div>

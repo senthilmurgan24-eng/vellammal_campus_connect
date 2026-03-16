@@ -133,9 +133,9 @@ export function Admissions() {
             <div className="mt-8 p-6 bg-white rounded-xl border border-gray-200">
               <h4 className="font-semibold text-[#0f172a] mb-4">Contact Information</h4>
               <div className="space-y-2 text-sm text-[#64748b]">
-                <p><strong>Phone:</strong> +91 98765 43210</p>
-                <p><strong>Email:</strong> admissions@novaneet.edu</p>
-                <p><strong>Address:</strong> 123 Academic Avenue, Education District, City - 560001</p>
+                <p><strong>Phone:</strong> +91 9344104954</p>
+                <p><strong>Email:</strong> academics@ranknovainstitute.com</p>
+                <p><strong>Address:</strong> City - MALDA, WEST BENGAL, 732142</p>
               </div>
             </div>
           </div>
