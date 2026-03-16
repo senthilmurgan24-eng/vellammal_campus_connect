@@ -43,12 +43,23 @@ systemctl restart nginx
 
 echo "Installing backend systemd service unit..."
 cp "$REPO_PATH/deploy/systemd/campus-connect.service" /etc/systemd/system/campus-connect.service
+
+echo "Preparing backend environment file..."
+mkdir -p /etc/default
+if [ ! -f /etc/default/campus-connect ]; then
+  cp "$REPO_PATH/deploy/systemd/campus-connect.env.example" /etc/default/campus-connect
+  chmod 600 /etc/default/campus-connect
+  echo "Created /etc/default/campus-connect from template. Update DB and EMAIL_APP_PASSWORD before starting backend."
+else
+  echo "/etc/default/campus-connect already exists. Keeping existing values."
+fi
+
 systemctl daemon-reload
 systemctl enable campus-connect
 
 echo "Setup complete."
 echo "Next steps:"
 echo "1) Place backend jar at /opt/campus-connect/backend/app.jar"
-echo "2) Create /etc/default/campus-connect with DB_URL, DB_USERNAME, DB_PASSWORD, EMAIL_USERNAME, EMAIL_APP_PASSWORD"
+echo "2) Edit /etc/default/campus-connect and set DB_URL, DB_USERNAME, DB_PASSWORD, EMAIL_USERNAME, EMAIL_FROM, EMAIL_APP_PASSWORD"
 echo "3) Start backend: sudo systemctl start campus-connect"
 echo "4) Check status: sudo systemctl status campus-connect"

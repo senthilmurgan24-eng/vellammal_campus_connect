@@ -42,11 +42,11 @@ spring:
    ```bash
    # Windows PowerShell
    $env:EMAIL_USERNAME="your-email@gmail.com"
-   $env:EMAIL_PASSWORD="your-app-password"
+  $env:EMAIL_APP_PASSWORD="your-app-password"
    
    # Linux/Mac
    export EMAIL_USERNAME="your-email@gmail.com"
-   export EMAIL_PASSWORD="your-app-password"
+  export EMAIL_APP_PASSWORD="your-app-password"
    ```
 
 4. **Or update application.yml directly** (not recommended for production):
@@ -179,7 +179,7 @@ emailService.sendEmail(
 ## Troubleshooting
 
 ### Email not sending
-- Check EMAIL_USERNAME and EMAIL_PASSWORD environment variables
+- Check EMAIL_USERNAME and EMAIL_APP_PASSWORD environment variables
 - Verify Gmail App Password is correct
 - Check firewall settings for port 587
 - Review email logs: `http://localhost:8081/api/email/logs?status=FAILED`

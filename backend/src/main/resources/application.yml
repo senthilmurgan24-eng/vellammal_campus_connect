@@ -35,8 +35,8 @@ spring:
   # Email Configuration
   mail:
     host: smtp.gmail.com
-    port: 587
-    username: ${EMAIL_USERNAME:your-email@gmail.com}
+    port: 465
+    username: ${EMAIL_USERNAME:academics@ranknovainstitute.com}
     password: ${EMAIL_APP_PASSWORD:your-16-char-app-password}
     properties:
       mail:
@@ -44,8 +44,10 @@ spring:
         smtp:
           auth: true
           starttls:
+            enable: false
+            required: false
+          ssl:
             enable: true
-            required: true
           connectiontimeout: 5000
           timeout: 5000
           writetimeout: 5000
@@ -61,7 +63,7 @@ spring:
 
 app:
   email:
-    from: ${EMAIL_FROM:${EMAIL_USERNAME:your-email@gmail.com}}
+    from: ${EMAIL_FROM:${EMAIL_USERNAME:academics@ranknovainstitute.com}}
   cors:
     allowed-origins: ${CORS_ALLOWED_ORIGINS:http://localhost:5173,https://ranknovainstitute.com,https://www.ranknovainstitute.com}
   websocket:

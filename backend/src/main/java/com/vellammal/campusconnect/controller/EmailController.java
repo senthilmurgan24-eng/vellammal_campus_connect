@@ -122,7 +122,7 @@ public class EmailController {
             ));
         }
 
-        boolean sent = emailService.sendEmailWithStatus("senthilmagilan0502@gmail.com", subject, body, null);
+        boolean sent = emailService.sendEmailWithStatus("academics@ranknovainstitute.com", subject, body, null);
 
         if (!sent) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(Map.of(

@@ -4,6 +4,7 @@ import com.vellammal.campusconnect.entity.EmailLog;
 import com.vellammal.campusconnect.entity.EmailTrigger;
 import com.vellammal.campusconnect.repository.EmailLogRepository;
 import com.vellammal.campusconnect.repository.EmailTriggerRepository;
+import jakarta.annotation.PostConstruct;
 import jakarta.mail.MessagingException;
 import jakarta.mail.internet.MimeMessage;
 import lombok.RequiredArgsConstructor;
@@ -33,14 +34,39 @@ public class EmailService {
     @Value("${spring.mail.password:}")
     private String mailPassword;
 
+    @PostConstruct
+    public void logSmtpConfigurationStatus() {
+        boolean usernameConfigured = mailUsername != null
+            && !mailUsername.isBlank()
+            && !mailUsername.contains("your-smtp-email@domain.com");
+        boolean fromConfigured = fromAddress != null
+            && !fromAddress.isBlank()
+            && !fromAddress.contains("your-smtp-email@domain.com");
+        boolean appPasswordConfigured = mailPassword != null
+            && !mailPassword.isBlank()
+            && !mailPassword.contains("your-16-char-app-password");
+
+        log.info(
+            "SMTP startup check: usernameConfigured={}, fromConfigured={}, appPasswordConfigured={}",
+            usernameConfigured,
+            fromConfigured,
+            appPasswordConfigured
+        );
+
+        String configIssue = getEmailConfigurationIssue();
+        if (configIssue != null) {
+            log.warn("SMTP configuration issue detected: {}", configIssue);
+        }
+    }
+
     public String getEmailConfigurationIssue() {
-        if (mailUsername == null || mailUsername.isBlank() || mailUsername.contains("your-email@gmail.com")) {
+        if (mailUsername == null || mailUsername.isBlank() || mailUsername.contains("your-smtp-email@domain.com")) {
             return "SMTP username is not configured. Set EMAIL_USERNAME.";
         }
         if (mailPassword == null || mailPassword.isBlank() || mailPassword.contains("your-16-char-app-password")) {
             return "SMTP app password is not configured. Set EMAIL_APP_PASSWORD.";
         }
-        if (fromAddress == null || fromAddress.isBlank() || fromAddress.contains("your-email@gmail.com")) {
+        if (fromAddress == null || fromAddress.isBlank() || fromAddress.contains("your-smtp-email@domain.com")) {
             return "From address is not configured. Set EMAIL_FROM or EMAIL_USERNAME.";
         }
         return null;

@@ -66,6 +66,7 @@ DB_URL=jdbc:postgresql://<db-host>:5432/campus_connect
 DB_USERNAME=<db-user>
 DB_PASSWORD=<db-password>
 EMAIL_USERNAME=<smtp-user>
+EMAIL_FROM=<smtp-from-address>
 EMAIL_APP_PASSWORD=<smtp-password>
 JWT_SECRET=<long-random-secret>
 ```
