@@ -34,7 +34,8 @@ export default defineConfig({
     proxy: {
       '/api': {
         //target: 'http://localhost:8081',
-        target: 'http://15.134.36.22:8081',
+        //target: 'http://15.134.36.22:8081',
+        target: 'https://api.ranknovainstitute.com/api ✅',
         changeOrigin: true
       }
     }
