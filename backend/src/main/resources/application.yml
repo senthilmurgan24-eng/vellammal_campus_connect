@@ -34,7 +34,7 @@ spring:
   
   # Email Configuration
   mail:
-    host: smtp.gmail.com
+    host: smtp.hostinger.com
     port: 465
     username: ${EMAIL_USERNAME:academics@ranknovainstitute.com}
     password: ${EMAIL_APP_PASSWORD:your-16-char-app-password}
