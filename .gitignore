@@ -3,3 +3,6 @@ frontend/node_modules
 dist
 build
 .vercel
+
+# Java/Maven build output
+backend/target/
