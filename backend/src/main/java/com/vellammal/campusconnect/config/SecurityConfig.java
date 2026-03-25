@@ -34,15 +34,26 @@ public class SecurityConfig {
     @Bean
     SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-                .cors(Customizer.withDefaults())
-                .csrf(csrf -> csrf.disable())
+    .cors(Customizer.withDefaults())
+    .csrf(csrf -> csrf.disable())
+    .headers(headers -> headers
+        .contentSecurityPolicy(csp -> csp
+    .policyDirectives("default-src 'self'; connect-src 'self' http://localhost:5173 https://ranknovainstitute.com https://www.ranknovainstitute.com; img-src 'self' data:; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'")
+        )
+        .frameOptions(frame -> frame.sameOrigin())
+    .xssProtection(xss -> xss.disable()) // X-XSS-Protection is deprecated in modern browsers
+    .httpStrictTransportSecurity(hsts -> hsts
+        .maxAgeInSeconds(31536000)
+        .includeSubDomains(true)) // modern browsers ignore this, safe to disable
+    )
                 .sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth -> auth
                     .dispatcherTypeMatchers(DispatcherType.ERROR).permitAll()
                     .requestMatchers("/api/auth/login", "/api/auth/refresh", "/actuator/**", "/ws-connect/**").permitAll()
                     .requestMatchers("/error").permitAll()
-                    .requestMatchers("/api/email/**").permitAll()
+                    .requestMatchers("/api/email/send").authenticated()
                         .requestMatchers(HttpMethod.GET, "/").permitAll()
+                        .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
                         .anyRequest().authenticated()
                 )
                 .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
@@ -52,9 +63,10 @@ public class SecurityConfig {
     @Bean
     CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOriginPatterns(parseCsv(allowedOrigins));
+        configuration.setAllowedOrigins(parseCsv(allowedOrigins));
         configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"));
         configuration.setAllowedHeaders(List.of("Authorization", "Content-Type", "Accept"));
+        configuration.setExposedHeaders(List.of("Authorization"));
         configuration.setAllowCredentials(true);
 
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
