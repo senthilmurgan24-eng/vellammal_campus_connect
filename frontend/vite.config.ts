@@ -2,6 +2,8 @@ import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import { VitePWA } from 'vite-plugin-pwa';
 
+const devProxyTarget = process.env.VITE_DEV_PROXY_TARGET ?? 'http://localhost:8081';
+
 export default defineConfig({
   plugins: [
     react(),
@@ -33,9 +35,7 @@ export default defineConfig({
   server: {
     proxy: {
       '/api': {
-        //target: 'http://localhost:8081',
-        //target: 'http://15.134.36.22:8081',
-        target: 'https://api.ranknovainstitute.com/api ✅',
+        target: devProxyTarget,
         changeOrigin: true
       }
     }

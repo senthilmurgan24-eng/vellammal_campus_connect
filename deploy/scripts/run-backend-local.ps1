@@ -11,10 +11,12 @@ if (-not (Test-Path $backendPath)) {
   throw "Backend directory not found at $backendPath"
 }
 
-# Use provided values unless already set in the current shell.
-if (-not $env:DB_URL) { $env:DB_URL = "jdbc:postgresql://ranknova-db.cpgiaoygqj8z.ap-southeast-2.rds.amazonaws.com:5432/ranknova" }
-if (-not $env:DB_USERNAME) { $env:DB_USERNAME = "postgres" }
-if (-not $env:DB_PASSWORD) { $env:DB_PASSWORD = "Ranknova" }
+# Use local H2 by default for localhost development.
+if (-not $env:DB_URL) { $env:DB_URL = "jdbc:h2:file:./data/local-dev-db;MODE=PostgreSQL;DATABASE_TO_LOWER=TRUE;AUTO_SERVER=TRUE" }
+if (-not $env:DB_DRIVER) { $env:DB_DRIVER = "org.h2.Driver" }
+if (-not $env:DB_DIALECT) { $env:DB_DIALECT = "org.hibernate.dialect.H2Dialect" }
+if (-not $env:DB_USERNAME) { $env:DB_USERNAME = "sa" }
+if (-not $env:DB_PASSWORD) { $env:DB_PASSWORD = "" }
 
 # Email configuration is sourced from environment variables.
 if (-not $env:EMAIL_USERNAME) {
@@ -44,7 +46,18 @@ if (-not $env:EMAIL_APP_PASSWORD) {
   $env:EMAIL_APP_PASSWORD = [Environment]::GetEnvironmentVariable("EMAIL_APP_PASSWORD", "Machine")
 }
 if (-not $env:EMAIL_APP_PASSWORD) {
-  throw "EMAIL_APP_PASSWORD is not set. Set it in your shell or persist it with: setx EMAIL_APP_PASSWORD \"<your-app-password>\""
+  Write-Warning "EMAIL_APP_PASSWORD is not set. Email features may fail in local mode."
+  $env:EMAIL_APP_PASSWORD = "local-dev-placeholder"
+}
+
+if (-not $env:GOOGLE_CLIENT_ID) {
+  $env:GOOGLE_CLIENT_ID = [Environment]::GetEnvironmentVariable("GOOGLE_CLIENT_ID", "User")
+}
+if (-not $env:GOOGLE_CLIENT_ID) {
+  $env:GOOGLE_CLIENT_ID = [Environment]::GetEnvironmentVariable("GOOGLE_CLIENT_ID", "Machine")
+}
+if (-not $env:GOOGLE_CLIENT_ID) {
+  Write-Warning "GOOGLE_CLIENT_ID is not set. Google SSO login will be unavailable in local testing."
 }
 
 $existingPid = Get-NetTCPConnection -LocalPort ([int]$BackendPort) -State Listen -ErrorAction SilentlyContinue |

@@ -28,7 +28,7 @@ public class SecurityConfig {
 
     private final JwtAuthenticationFilter jwtAuthenticationFilter;
 
-    @Value("${app.cors.allowed-origins:http://localhost:5173,https://ranknovainstitute.com,https://www.ranknovainstitute.com}")
+    @Value("${app.cors.allowed-origins:http://localhost:5173,http://localhost:3000,http://localhost:4173,https://ranknovainstitute.com,https://www.ranknovainstitute.com}")
     private String allowedOrigins;
 
     @Bean
@@ -38,7 +38,7 @@ public class SecurityConfig {
     .csrf(csrf -> csrf.disable())
     .headers(headers -> headers
         .contentSecurityPolicy(csp -> csp
-    .policyDirectives("default-src 'self'; connect-src 'self' http://localhost:5173 https://ranknovainstitute.com https://www.ranknovainstitute.com https://accounts.google.com; img-src 'self' data:; script-src 'self' 'unsafe-inline' https://accounts.google.com; style-src 'self' 'unsafe-inline'; frame-src 'self' https://accounts.google.com")
+    .policyDirectives("default-src 'self'; connect-src 'self' http://localhost:5173 http://localhost:3000 http://localhost:4173 https://ranknovainstitute.com https://www.ranknovainstitute.com https://accounts.google.com; img-src 'self' data:; script-src 'self' 'unsafe-inline' https://accounts.google.com; style-src 'self' 'unsafe-inline'; frame-src 'self' https://accounts.google.com")
         )
         .frameOptions(frame -> frame.sameOrigin())
     .xssProtection(xss -> xss.disable()) // X-XSS-Protection is deprecated in modern browsers
