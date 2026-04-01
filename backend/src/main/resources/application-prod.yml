@@ -1,0 +1,26 @@
+# Spring Boot — production profile
+# Activate: set SPRING_PROFILES_ACTIVE=prod
+#
+# All sensitive values must be supplied via environment variables (no hard-coded secrets).
+# This file is committed — it documents which env vars are required in production.
+
+spring:
+  datasource:
+    url: ${DB_URL}
+    driver-class-name: org.postgresql.Driver
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
+
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+
+  # Disable H2 console in production
+  h2:
+    console:
+      enabled: false
+
+app:
+  cors:
+    allowed-origins: ${CORS_ALLOWED_ORIGINS:https://ranknovainstitute.com,https://www.ranknovainstitute.com}
+  websocket:
+    allowed-origins: ${WS_ALLOWED_ORIGINS:https://ranknovainstitute.com,https://www.ranknovainstitute.com}

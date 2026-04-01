@@ -1,0 +1,32 @@
+# Spring Boot — local development profile
+# Activate: set SPRING_PROFILES_ACTIVE=local  (done automatically by run-backend-dev.ps1)
+#           or:  mvn spring-boot:run -Dspring-boot.run.profiles=local
+#
+# Overrides application.yml for local HTTP / H2 / loose email settings.
+# No secrets in this file — commit it.
+
+spring:
+  datasource:
+    url: jdbc:h2:file:./data/local-dev-db;MODE=PostgreSQL;DATABASE_TO_LOWER=TRUE;AUTO_SERVER=TRUE
+    driver-class-name: org.h2.Driver
+    username: sa
+    password:
+
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+
+  # H2 browser console available at http://localhost:8081/h2-console
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+
+  # Downgrade mail errors to warnings so a missing password does not crash startup
+  mail:
+    password: ${EMAIL_APP_PASSWORD:local-dev-placeholder}
+
+app:
+  cors:
+    allowed-origins: http://localhost:5173,http://localhost:3000,http://localhost:4173
+  websocket:
+    allowed-origins: http://localhost:5173,http://localhost:3000,http://localhost:4173
