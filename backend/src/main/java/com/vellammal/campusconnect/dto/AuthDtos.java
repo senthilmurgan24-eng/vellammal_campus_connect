@@ -17,6 +17,14 @@ public class AuthDtos {
     }
 
     @Data
+    public static class SsoLoginRequest {
+        @NotBlank
+        private String idToken;
+        @NotBlank
+        private String role;
+    }
+
+    @Data
     public static class TokenResponse {
         private String accessToken;
         private String refreshToken;

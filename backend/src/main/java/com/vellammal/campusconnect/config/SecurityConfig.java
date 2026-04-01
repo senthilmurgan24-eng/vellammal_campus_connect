@@ -38,7 +38,7 @@ public class SecurityConfig {
     .csrf(csrf -> csrf.disable())
     .headers(headers -> headers
         .contentSecurityPolicy(csp -> csp
-    .policyDirectives("default-src 'self'; connect-src 'self' http://localhost:5173 https://ranknovainstitute.com https://www.ranknovainstitute.com; img-src 'self' data:; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'")
+    .policyDirectives("default-src 'self'; connect-src 'self' http://localhost:5173 https://ranknovainstitute.com https://www.ranknovainstitute.com https://accounts.google.com; img-src 'self' data:; script-src 'self' 'unsafe-inline' https://accounts.google.com; style-src 'self' 'unsafe-inline'; frame-src 'self' https://accounts.google.com")
         )
         .frameOptions(frame -> frame.sameOrigin())
     .xssProtection(xss -> xss.disable()) // X-XSS-Protection is deprecated in modern browsers
@@ -49,7 +49,7 @@ public class SecurityConfig {
                 .sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth -> auth
                     .dispatcherTypeMatchers(DispatcherType.ERROR).permitAll()
-                    .requestMatchers("/api/auth/login", "/api/auth/refresh", "/actuator/**", "/ws-connect/**").permitAll()
+                    .requestMatchers("/api/auth/login", "/api/auth/refresh", "/api/auth/sso/google", "/actuator/**", "/ws-connect/**").permitAll()
                     .requestMatchers("/error").permitAll()
                     .requestMatchers("/api/email/send").authenticated()
                         .requestMatchers(HttpMethod.GET, "/").permitAll()

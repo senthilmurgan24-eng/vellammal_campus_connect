@@ -2,8 +2,10 @@ package com.vellammal.campusconnect.controller;
 
 import com.vellammal.campusconnect.dto.AuthDtos.LoginRequest;
 import com.vellammal.campusconnect.dto.AuthDtos.RefreshRequest;
+import com.vellammal.campusconnect.dto.AuthDtos.SsoLoginRequest;
 import com.vellammal.campusconnect.dto.AuthDtos.TokenResponse;
 import com.vellammal.campusconnect.security.JwtService;
+import com.vellammal.campusconnect.service.GoogleSsoService;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -19,9 +21,11 @@ import java.util.Map;
 public class AuthController {
 
     private final JwtService jwtService;
+    private final GoogleSsoService googleSsoService;
 
-    public AuthController(JwtService jwtService) {
+    public AuthController(JwtService jwtService, GoogleSsoService googleSsoService) {
         this.jwtService = jwtService;
+        this.googleSsoService = googleSsoService;
     }
 
     @PostMapping("/login")
@@ -48,5 +52,26 @@ public class AuthController {
         resp.setRefreshToken(request.getRefreshToken());
         resp.setUser(Map.of("name", "user", "role", "student"));
         return ResponseEntity.ok(Map.of("data", resp, "timestamp", System.currentTimeMillis()));
+    }
+
+    @PostMapping("/sso/google")
+    public ResponseEntity<Map<String, Object>> googleSsoLogin(@Valid @RequestBody SsoLoginRequest request) {
+        GoogleSsoService.GoogleUser googleUser = googleSsoService.verifyIdToken(request.getIdToken());
+
+        String role = request.getRole().toUpperCase();
+        String access = jwtService.generate(googleUser.email(), List.of("ROLE_" + role), 3600);
+        String refresh = jwtService.generate(googleUser.email(), List.of("ROLE_" + role), 24 * 3600);
+
+        TokenResponse tokenResponse = new TokenResponse();
+        tokenResponse.setAccessToken(access);
+        tokenResponse.setRefreshToken(refresh);
+        tokenResponse.setUser(Map.of(
+                "name", googleUser.name(),
+                "email", googleUser.email(),
+                "role", request.getRole(),
+                "provider", "google"
+        ));
+
+        return ResponseEntity.ok(Map.of("data", tokenResponse, "timestamp", System.currentTimeMillis()));
     }
 }

@@ -1,7 +1,7 @@
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useApiMutation } from '@/hooks/useApi';
-import { login, LoginPayload } from '@/api/services/auth';
+import { login, LoginPayload, loginWithGoogleSso } from '@/api/services/auth';
 import { useToast } from '@/components/ui/Toast';
 import ImageWithSkeleton from '@/components/ui/ImageWithSkeleton';
 import usePerformance from '@/hooks/usePerformance';
@@ -18,6 +18,52 @@ const roleLabels: Record<LoginPayload['role'], string> = {
   faculty: 'Faculty'
 };
 
+type GoogleCredentialResponse = {
+  credential?: string;
+};
+
+declare global {
+  interface Window {
+    google?: {
+      accounts: {
+        id: {
+          initialize: (options: {
+            client_id: string;
+            callback: (response: GoogleCredentialResponse) => void;
+          }) => void;
+          renderButton: (parent: HTMLElement, options: Record<string, string>) => void;
+        };
+      };
+    };
+  }
+}
+
+const GOOGLE_SCRIPT_ID = 'google-identity-services-script';
+
+const loadGoogleIdentityScript = () =>
+  new Promise<void>((resolve, reject) => {
+    if (window.google?.accounts?.id) {
+      resolve();
+      return;
+    }
+
+    const existing = document.getElementById(GOOGLE_SCRIPT_ID) as HTMLScriptElement | null;
+    if (existing) {
+      existing.addEventListener('load', () => resolve(), { once: true });
+      existing.addEventListener('error', () => reject(new Error('Failed to load Google script')), { once: true });
+      return;
+    }
+
+    const script = document.createElement('script');
+    script.id = GOOGLE_SCRIPT_ID;
+    script.src = 'https://accounts.google.com/gsi/client';
+    script.async = true;
+    script.defer = true;
+    script.onload = () => resolve();
+    script.onerror = () => reject(new Error('Failed to load Google script'));
+    document.head.appendChild(script);
+  });
+
 function Login() {
   usePerformance();
   const [role, setRole] = useState<LoginPayload['role']>('student');
@@ -25,6 +71,9 @@ function Login() {
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
   const { push } = useToast();
+  const googleClientId = import.meta.env.VITE_GOOGLE_CLIENT_ID as string | undefined;
+  const googleButtonRef = useRef<HTMLDivElement | null>(null);
+  const [googleReady, setGoogleReady] = useState(false);
 
   const mutation = useApiMutation('/auth/login', 'post', {
     mutationFn: (payload: LoginPayload) => login(payload),
@@ -44,7 +93,72 @@ function Login() {
     }
   });
 
-  const isDisabled = useMemo(() => !identifier || !password || mutation.isPending, [identifier, password, mutation.isPending]);
+  const ssoMutation = useApiMutation('/auth/sso/google', 'post', {
+    mutationFn: (payload: { idToken: string; role: LoginPayload['role'] }) => loginWithGoogleSso(payload),
+    onSuccess: () => {
+      push({ variant: 'success', title: 'Welcome back!' });
+      navigate('/dashboard');
+    },
+    onError: () => {
+      tokenStore.setTokens('demo-access-token', 'demo-refresh-token');
+      push({
+        variant: 'warning',
+        title: 'SSO unavailable',
+        description: 'Proceeding in preview mode. Data may be stale or unavailable.'
+      });
+      navigate('/dashboard');
+    }
+  });
+  const { mutate: mutateGoogleSso, isPending: isSsoPending } = ssoMutation;
+
+  useEffect(() => {
+    let active = true;
+
+    if (!googleClientId || !googleButtonRef.current) {
+      setGoogleReady(false);
+      return;
+    }
+
+    loadGoogleIdentityScript()
+      .then(() => {
+        if (!active || !window.google?.accounts?.id || !googleButtonRef.current) {
+          return;
+        }
+
+        window.google.accounts.id.initialize({
+          client_id: googleClientId,
+          callback: (response: GoogleCredentialResponse) => {
+            const idToken = response.credential;
+            if (!idToken) {
+              push({ variant: 'error', title: 'SSO failed', description: 'Google did not return an identity token.' });
+              return;
+            }
+            mutateGoogleSso({ idToken, role });
+          }
+        });
+
+        googleButtonRef.current.innerHTML = '';
+        window.google.accounts.id.renderButton(googleButtonRef.current, {
+          type: 'standard',
+          shape: 'pill',
+          theme: 'outline',
+          text: 'continue_with',
+          size: 'large',
+          width: '380'
+        });
+        setGoogleReady(true);
+      })
+      .catch(() => {
+        setGoogleReady(false);
+      });
+
+    return () => {
+      active = false;
+    };
+  }, [googleClientId, role, push, mutateGoogleSso]);
+
+  const isAuthPending = mutation.isPending || isSsoPending;
+  const isDisabled = useMemo(() => !identifier || !password || isAuthPending, [identifier, password, isAuthPending]);
   const identifierLabel = role === 'faculty' ? 'Faculty ID or Mobile Number' : 'Student ID or Mobile Number';
   const identifierPlaceholder = role === 'faculty' ? 'e.g. FAC2024001 or 9876543210' : 'e.g. VCC2024001 or 9876543210';
 
@@ -202,14 +316,22 @@ function Login() {
                   <span className="bg-white dark:bg-background-dark px-2 text-slate-500">Or continue with</span>
                 </div>
               </div>
-              <button
-                className="w-full bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 hover:border-primary text-slate-700 dark:text-slate-300 font-bold py-3 rounded-lg transition-all flex items-center justify-center gap-2"
-                type="button"
-                onClick={() => push({ variant: 'info', title: 'OTP', description: 'OTP flow coming soon' })}
-              >
-                <span className="material-symbols-outlined text-lg">vibration</span>
-                Login via OTP
-              </button>
+              {googleClientId ? (
+                <div className="w-full min-h-11 rounded-lg border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 flex items-center justify-center p-1">
+                  <div ref={googleButtonRef} className="w-full flex justify-center" />
+                </div>
+              ) : (
+                <button
+                  className="w-full bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-500 dark:text-slate-400 font-bold py-3 rounded-lg transition-all"
+                  type="button"
+                  onClick={() => push({ variant: 'info', title: 'SSO not configured', description: 'Set VITE_GOOGLE_CLIENT_ID to enable Google SSO.' })}
+                >
+                  Google SSO unavailable
+                </button>
+              )}
+              {!googleReady && googleClientId ? (
+                <p className="text-xs text-slate-500 dark:text-slate-400 text-center">Preparing Google Sign-In...</p>
+              ) : null}
             </form>
 
             <div className="mt-12 pt-8 border-t border-slate-100 dark:border-slate-800 flex flex-wrap justify-center gap-6 text-xs font-medium text-slate-500">

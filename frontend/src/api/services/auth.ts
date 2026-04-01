@@ -16,8 +16,20 @@ export interface AuthResponse {
   };
 }
 
+export interface GoogleSsoPayload {
+  idToken: string;
+  role: 'student' | 'parent' | 'faculty';
+}
+
 export const login = async (payload: LoginPayload): Promise<AuthResponse> => {
   const res = await axiosInstance.post('/auth/login', payload);
+  const data = res.data?.data ?? res.data;
+  tokenStore.setTokens(data.accessToken, data.refreshToken);
+  return data as AuthResponse;
+};
+
+export const loginWithGoogleSso = async (payload: GoogleSsoPayload): Promise<AuthResponse> => {
+  const res = await axiosInstance.post('/auth/sso/google', payload);
   const data = res.data?.data ?? res.data;
   tokenStore.setTokens(data.accessToken, data.refreshToken);
   return data as AuthResponse;
