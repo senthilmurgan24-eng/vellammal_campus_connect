@@ -144,7 +144,7 @@ export function Results() {
           ))}
         </div> */}
 
-        {/* Recent Achievements */}
+        {/* Recent Achievements 
         <div className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-6">
           <div className="bg-white/5 backdrop-blur-sm border border-white/10 p-6 rounded-xl">
             <div className="flex items-center gap-3 mb-3">
@@ -173,7 +173,7 @@ export function Results() {
               Students won scholarships worth ₹2.5 Crores in various national competitions
             </p>
           </div>
-        </div>
+        </div> */}
       </div>
     </section>
   );
