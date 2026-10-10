@@ -2,18 +2,19 @@ import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import { VitePWA } from 'vite-plugin-pwa';
 
+const devProxyTarget = process.env.VITE_DEV_PROXY_TARGET ?? 'http://localhost:8081';
+
 export default defineConfig({
   plugins: [
     react(),
     VitePWA({
       registerType: 'autoUpdate',
-      strategies: 'generateSW',
+      strategies: 'injectManifest',
       srcDir: 'src/pwa',
       filename: 'sw.ts',
-      injectManifest: { swDest: 'sw.js' },
       includeAssets: ['favicon.svg', 'robots.txt', 'apple-touch-icon.png'],
       manifest: {
-        name: 'Vellammal Campus Connect',
+        name: 'RANKNOVA INSTITUTE',
         short_name: 'VCC',
         description: 'Unified portal for students, parents, and faculty',
         theme_color: '#137fec',
@@ -30,6 +31,14 @@ export default defineConfig({
   ],
   build: {
     sourcemap: true
+  },
+  server: {
+    proxy: {
+      '/api': {
+        target: devProxyTarget,
+        changeOrigin: true
+      }
+    }
   },
   resolve: {
     alias: {

@@ -3,3 +3,17 @@ frontend/node_modules
 dist
 build
 .vercel
+
+# Local environment files
+frontend/.env.local
+
+# Local development databases
+backend/data/
+*.mv.db
+*.trace.db
+*.lock.db
+
+# Java/Maven build output
+backend/target/
+.env*.local
+frontend/dist

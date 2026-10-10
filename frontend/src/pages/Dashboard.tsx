@@ -150,8 +150,8 @@ const Sidebar = memo(({ notificationsCount }: { notificationsCount: number }) =>
         <span className="material-symbols-outlined text-2xl">school</span>
       </div>
       <div>
-        <h1 className="font-bold text-lg leading-tight">Vellammal</h1>
-        <p className="text-xs text-slate-500 font-medium uppercase tracking-wider">Campus Connect</p>
+        <h1 className="font-bold text-lg leading-tight">RankNova</h1>
+        <p className="text-xs text-slate-500 font-medium uppercase tracking-wider">Institute</p>
       </div>
     </div>
     <nav className="flex-1 px-4 space-y-2 mt-4">

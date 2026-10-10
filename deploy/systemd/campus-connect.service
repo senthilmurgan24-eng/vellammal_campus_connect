@@ -1,0 +1,25 @@
+[Unit]
+Description=Campus Connect Spring Boot Service
+After=network.target
+
+[Service]
+Type=simple
+User=ubuntu
+WorkingDirectory=/opt/campus-connect/backend
+ExecStart=/usr/bin/java -jar /opt/campus-connect/backend/app.jar
+SuccessExitStatus=143
+Restart=always
+RestartSec=5
+
+# Runtime environment
+Environment=SPRING_PROFILES_ACTIVE=prod
+Environment=CORS_ALLOWED_ORIGINS=https://ranknovainstitute.com,https://www.ranknovainstitute.com
+Environment=WS_ALLOWED_ORIGINS=https://ranknovainstitute.com,https://www.ranknovainstitute.com
+Environment=MAX_FILE_SIZE=25MB
+Environment=MAX_REQUEST_SIZE=30MB
+
+# Set these in /etc/default/campus-connect for production secrets
+EnvironmentFile=-/etc/default/campus-connect
+
+[Install]
+WantedBy=multi-user.target
