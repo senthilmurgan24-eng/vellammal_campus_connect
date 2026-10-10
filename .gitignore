@@ -15,3 +15,5 @@ backend/data/
 
 # Java/Maven build output
 backend/target/
+.env*.local
+frontend/dist
